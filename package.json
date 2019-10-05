@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
+    "start:front": "react-scripts start",
     "prettierFix": "prettier --config .prettierrc --write",
     "eslint": "eslint"
   },
@@ -20,11 +21,29 @@
       "git add"
     ]
   },
-  "author": "",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "author": "Adri Blanco <adriblabla@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "node-hid": "^0.7.3",
-    "websocket": "^1.0.28"
+    "websocket": "^1.0.28",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-scripts": "3.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
