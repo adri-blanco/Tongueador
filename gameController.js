@@ -3,7 +3,7 @@ const initialState = {
   winnerTimestamp: null,
   teamLogged: {},
 };
-let state = initialState;
+let state = JSON.parse(JSON.stringify(initialState));
 
 function teamPressedButton(server, teamKey) {
   const { winner, winnerTimestamp, teamLogged } = state;
@@ -14,7 +14,7 @@ function teamPressedButton(server, teamKey) {
     state.teamLogged[teamKey] = true;
 
     setTimeout(() => {
-      state = initialState;
+      state = JSON.parse(JSON.stringify(initialState));
       // eslint-disable-next-line no-console
       console.log('Ready, sir!');
     }, 10000);
