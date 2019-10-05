@@ -1,10 +1,10 @@
-const DeviceManager = require('./devicemanager')
-const WServer = require('./wserver')
-const GameController = require('./gameController')
+import DeviceManager from './devicemanager';
+import WServer from './wserver';
+import GameController from './gameController';
 
-const server = new WServer()
-const gameController = new GameController(server)
+const server = new WServer();
+const gameController = new GameController(server);
 
-DeviceManager(gameController)
+DeviceManager(gameController);
 
-server.listen(1337)
+server.listen(1337);

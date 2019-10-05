@@ -4,16 +4,44 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js --exec babel-node",
+    "prettierFix": "prettier --config .prettierrc --write",
+    "eslint": "eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run prettierFix",
+      "npm run eslint",
+      "git add"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.1.0",
     "node-hid": "^0.7.3",
     "websocket": "^1.0.28"
   },
   "devDependencies": {
-    "nodemon": "^1.19.3"
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "husky": "^3.0.8",
+    "lint-staged": "^9.4.1",
+    "nodemon": "^1.19.3",
+    "prettier": "^1.18.2"
   }
 }

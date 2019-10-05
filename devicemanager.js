@@ -1,31 +1,31 @@
-const HID = require("node-hid");
+import HID from 'node-hid';
 
-PID = 57345;
-VID = 2064;
+const PID = 57345;
+const VID = 2064;
 
 function Devicemanager(gameController) {
-  const p_device = new HID.HID(VID, PID);
+  const device = new HID.HID(VID, PID);
+  device.on('data', rawData => {
+    const data = rawData.toString('hex');
 
-  t = Date.now();
-  p_device.on("data", data => {
-    data = parseInt(data.toString("hex"), 16);
-
-    // If both buttons are pulsed
-    if (data == 0x0280807f7f8f0100) {
-      gameController.onDraw()
-      return;
-    }
-    // If button A is pulsed
-    if (data & 0x0000000000000f00) {
-      gameController.onEventPulsed("A")
+    if (data === '0280807f7f0f1000') {
+      gameController.onEventPulsed('A');
     }
 
-    if (data & 0x0000000000f00000) {
-      gameController.onEventPulsed("B")
+    if (data === '018080007f0f0000') {
+      gameController.onEventPulsed('B');
     }
 
+    if (data === '0280807f000f0000') {
+      gameController.onEventPulsed('C');
+    }
+
+    if (data === '0180807f7f8f0000') {
+      gameController.onEventPulsed('D');
+    }
   });
-  p_device.on("error", console.error);
+  // disable-next-line no-console
+  device.on('error', console.error);
 }
 
 module.exports = Devicemanager;
