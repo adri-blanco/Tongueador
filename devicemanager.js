@@ -9,19 +9,19 @@ function Devicemanager(gameController) {
     const data = rawData.toString('hex');
 
     if (data === '0280807f7f0f1000') {
-      gameController.onEventPulsed('A');
+      gameController.teamPressedButton('A');
     }
 
     if (data === '018080007f0f0000') {
-      gameController.onEventPulsed('B');
+      gameController.teamPressedButton('B');
     }
 
     if (data === '0280807f000f0000') {
-      gameController.onEventPulsed('C');
+      gameController.teamPressedButton('C');
     }
 
     if (data === '0180807f7f8f0000') {
-      gameController.onEventPulsed('D');
+      gameController.teamPressedButton('D');
     }
   });
   // disable-next-line no-console

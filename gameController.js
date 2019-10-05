@@ -1,50 +1,40 @@
-function GameController(wsServer) {
-  this.wsServer = wsServer;
-  this.scores = {};
-  this.resetting = false;
-  this.globalTimeout = null;
-  this.winner = null;
-  this.timeHit = null;
+const initialState = {
+  winner: null,
+  winnerTimestamp: null,
+  teamLogged: {},
+};
+let state = initialState;
+
+function teamPressedButton(server, teamKey) {
+  const { winner, winnerTimestamp, teamLogged } = state;
+  if (!winner) {
+    server.send({ winner: teamKey, status: 'winner' });
+    state.winner = teamKey;
+    state.winnerTimestamp = new Date().getTime();
+    state.teamLogged[teamKey] = true;
+
+    setTimeout(() => {
+      state = initialState;
+      // eslint-disable-next-line no-console
+      console.log('Ready, sir!');
+    }, 10000);
+  }
+
+  if (winner !== teamKey && !teamLogged[teamKey]) {
+    const differenceWithWinner = new Date().getTime() - winnerTimestamp;
+    server.send({
+      teamKey,
+      difference: differenceWithWinner,
+    });
+
+    state.teamLogged[teamKey] = true;
+  }
 }
 
-GameController.prototype.onEventPulsed = function onEventPulsed(eventCode) {
-  if (this.winner === null) {
-    this.winner = eventCode;
-    this.timeHit = new Date();
-    this.onReset();
-    setTimeout(() => {
-      this.winner = null;
-      this.logged = false;
-      // eslint-disable-next-line no-console
-      console.log('Ready, Sir!\n');
-    }, 10000);
-  }
-  if (!this.logged && this.winner !== eventCode) {
-    const difference = new Date() - this.timeHit;
-    this.wsServer.send({ difference });
-    // eslint-disable-next-line no-console
-    console.log(eventCode, ' hitted ', new Date() - this.timeHit, 'ms late');
-    this.logged = true;
-  }
-};
+function GameController(server) {
+  return {
+    teamPressedButton: teamKey => teamPressedButton(server, teamKey),
+  };
+}
 
-GameController.prototype.onDraw = function onDraw() {
-  if (this.winner === null) {
-    this.winner = Math.random() > 0.5 ? 'A' : 'B';
-    // eslint-disable-next-line no-console
-    console.log('Draw, and won: ', this.winner);
-    this.timeHit = new Date();
-    this.onReset();
-    setTimeout(() => {
-      this.winner = null;
-    }, 10000);
-  }
-};
-
-GameController.prototype.onReset = function onReset() {
-  const { winner } = this;
-  this.wsServer.send({ winner, status: 'winner' });
-  this.scores = {};
-};
-
-module.exports = GameController;
+export default GameController;
