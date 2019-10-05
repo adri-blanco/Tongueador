@@ -6,4 +6,4 @@ const server = new WServer();
 const gameController = GameController(server);
 DeviceManager(gameController);
 
-server.listen(3000);
+server.listen(3500);
