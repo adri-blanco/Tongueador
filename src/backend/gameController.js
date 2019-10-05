@@ -17,7 +17,7 @@ function teamPressedButton(server, teamKey) {
       state = JSON.parse(JSON.stringify(initialState));
       // eslint-disable-next-line no-console
       console.log('Ready, sir!');
-    }, 10000);
+    }, 1000);
   }
 
   if (winner !== teamKey && !teamLogged[teamKey]) {

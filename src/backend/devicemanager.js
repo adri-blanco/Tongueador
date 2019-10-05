@@ -1,5 +1,5 @@
 import HID from 'node-hid';
-import GameConfiguration from './config';
+import GameConfiguration from '../config';
 
 const PID = 57345;
 const VID = 2064;
@@ -17,7 +17,7 @@ function Devicemanager(gameController) {
       }
     });
   });
-  // disable-next-line no-console
+  // eslint-disable-next-line no-console
   device.on('error', console.error);
 }
 
