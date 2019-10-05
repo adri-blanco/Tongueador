@@ -1,118 +1,7 @@
 <html>
-    
-    <style>
-        @font-face {
-            font-family: 'labmedium';
-            src: url('./fonts/Lab-Medium.eot');
-            src: url('./fonts/Lab-Medium.eot?#iefix') format('embedded-opentype'),
-            url('./fonts/Lab-Medium.woff') format('woff'),
-            url('./fonts/Lab-Medium.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'labbold';
-            src: url('./fonts/Lab-Bold.eot');
-            src: url('./fonts/Lab-Bold.eot?#iefix') format('embedded-opentype'),
-            url('./fonts/Lab-Bold.woff') format('woff'),
-            url('./fonts/Lab-Bold.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        body {
-            margin: 0px;
-            background: floralwhite;
-        }
-        .container {
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .intro {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        .image {
-            height: 25%;
-        }
-        .text {
-            font-family: labmedium;
-        }
-        .small {
-            font-size: 60px;
-        }
-        .smaller {
-            font-size: 40px;
-        }
-        .big {
-            font-size: 200px;
-        }
-        .center {
-            text-align: center;
-        }
-        .logo {
-            width: 50%;
-            margin: 30px 0px;
-            -webkit-box-shadow: 5px 5px 10px 0px rgba(122,113,122,0.58);
-            -moz-box-shadow: 5px 5px 10px 0px rgba(122,113,122,0.58);
-            box-shadow: 5px 5px 10px 0px rgba(122,113,122,0.58);
-        }
-        .resultContainer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            margin: 0px 40px;
-        }
-        .playerContainer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .winner {
-            display: flex;
-            flex-direction: column;
-            margin: 50px;
-            width: 100%;
-        }
-        .winnerA {
-            background-color: #ffff00
-        }
-        .winnerB {
-            background-color: #ff00ff
-        }
-
-        .blink_text {
-
-        animation:1s blinker linear infinite;
-        -webkit-animation:1s blinker linear infinite;
-        -moz-animation:1s blinker linear infinite;
-
-        color: red;
-        }
-
-        @-moz-keyframes blinker {  
-        0% { opacity: 1.0; }
-        50% { opacity: 0.0; }
-        100% { opacity: 1.0; }
-        }
-
-        @-webkit-keyframes blinker {  
-        0% { opacity: 1.0; }
-        50% { opacity: 0.0; }
-        100% { opacity: 1.0; }
-        }
-
-        @keyframes blinker {  
-        0% { opacity: 1.0; }
-        50% { opacity: 0.0; }
-        100% { opacity: 1.0; }
-        }
-    </style>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
     <body>
         <div class="container">
             <div class="winner" id="winner">
@@ -179,17 +68,22 @@
 
             s.onmessage = (e) => {
                 const data = JSON.parse(e.data);
+                console.log('data: ', data);
+
                 if(data.difference) {
                     document.getElementById("difference").innerHTML = "Won with a difference of " + data.difference + "ms";
                 }
 
-                if(data.winner == 'A'){
-                    checkWinner(nombreEquipoA, 'winnerA');
+                if(data.winner) {
+                    checkWinner(data.winner, 'winnerA');
                 }
+                // if(data.winner == 'A'){
+                //     checkWinner(nombreEquipoA, 'winnerA');
+                // }
 
-                if(data.winner == 'B'){
-                    checkWinner(nombreEquipoB, 'winnerB');
-                }
+                // if(data.winner == 'B'){
+                //     checkWinner(nombreEquipoB, 'winnerB');
+                // }
             }
         </script>
 </html>
