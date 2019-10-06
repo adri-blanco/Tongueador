@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
     "start:front": "react-scripts start",
+    "config": "babel-node configurationWizard.js",
     "prettierFix": "prettier --config .prettierrc --write",
     "eslint": "eslint"
   },
