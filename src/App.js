@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import GameConfiguration from './config';
 import TeamCard from './components/TeamCard';
+import WinnerSection from './components/WinnerSection';
 
 const styles = {
   container: {
@@ -29,43 +30,42 @@ function renderTeamCards(teams) {
   });
 }
 
-function renderWinner(winner) {
-  return (
-    <div>
-      <span>{winner}</span>
-    </div>
-  );
-}
+// eslint-disable-next-line
+const server = new WebSocket('ws://127.0.0.1:3500');
 
 function App({ classes }) {
   const [state, setState] = useState({});
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    const server = new WebSocket('ws://127.0.0.1:3500');
-    server.onmessage = event => {
-      const data = JSON.parse(event.data);
-      if (data.eventKey === 'winner') {
-        setState({
-          winner: data.teamKey,
-          differences: [],
-        });
-      } else {
-        setState({
-          winner: state.winner,
-          differences: [...state.differences, data.difference],
-        });
-      }
-    };
-  }, []);
-  const { teams } = GameConfiguration;
+  function setWinner(winner) {
+    setState({
+      winner,
+      differences: [],
+    });
+  }
+  function pushDifferences(newDifference) {
+    setState({
+      ...state,
+      differences: [...state.differences, newDifference],
+    });
+  }
+  server.onmessage = function onMessage(event) {
+    const data = JSON.parse(event.data);
+    if (data.eventKey === 'winner') {
+      setWinner(data.teamKey);
+    } else {
+      pushDifferences(data);
+    }
+  };
 
+  const { teams } = GameConfiguration;
   return (
     <div className={classes.container}>
       {!teams && (
         <span>Configuration needed. Execute npm run config to fix this.</span>
       )}
       {!state.winner && renderTeamCards(teams)}
-      {state.winner && renderWinner(state.winner, state.differences)}
+      {state.winner && (
+        <WinnerSection winner={state.winner} differences={state.differences} />
+      )}
     </div>
   );
 }
