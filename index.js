@@ -1,6 +1,6 @@
-import DeviceManager from './backend/devicemanager';
-import WServer from './backend/wserver';
-import GameController from './backend/gameController';
+import DeviceManager from './src/backend/devicemanager';
+import WServer from './src/backend/wserver';
+import GameController from './src/backend/gameController';
 
 const server = new WServer();
 const gameController = GameController(server);

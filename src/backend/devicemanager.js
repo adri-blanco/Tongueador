@@ -11,9 +11,9 @@ function Devicemanager(gameController) {
   device.on('data', rawData => {
     const data = rawData.toString('hex');
 
-    teams.forEach(team => {
-      if (data === team.dataCode) {
-        gameController.teamPressedButton(team.teamKey);
+    Object.keys(teams).forEach(teamKey => {
+      if (data === teams[teamKey].dataCode) {
+        gameController.teamPressedButton(teams[teamKey].teamKey);
       }
     });
   });
