@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'labmedium';
+  src: url('./fonts/Lab-Medium.eot');
+  src: url('./fonts/Lab-Medium.eot?#iefix') format('embedded-opentype'),
+  url('./fonts/Lab-Medium.woff') format('woff'),
+  url('./fonts/Lab-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'labbold';
+  src: url('./fonts/Lab-Bold.eot');
+  src: url('./fonts/Lab-Bold.eot?#iefix') format('embedded-opentype'),
+  url('./fonts/Lab-Bold.woff') format('woff'),
+  url('./fonts/Lab-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, labmedium, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

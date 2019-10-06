@@ -1,0 +1,60 @@
+export default {
+  teams: {
+    A: {
+      teamKey: 'A',
+      teamName: 'Equipo A',
+      logo: 'https://es.freelogodesign.org/Content/img/logo-ex-2.png',
+      points: 0,
+      dataCode: '0280807f7f0f1000',
+    },
+    B: {
+      teamKey: 'B',
+      teamName: 'Equipo B',
+      logo: 'https://es.freelogodesign.org/Content/img/logo-ex-2.png',
+      points: 0,
+      dataCode: '018080007f0f0000',
+    },
+    C: {
+      teamKey: 'C',
+      teamName: 'Equipo C',
+      logo: 'https://es.freelogodesign.org/Content/img/logo-ex-2.png',
+      points: 0,
+      dataCode: '0280807f000f0000',
+    },
+    D: {
+      teamKey: 'D',
+      teamName: 'Equipo D',
+      logo: 'https://es.freelogodesign.org/Content/img/logo-ex-2.png',
+      points: 0,
+      dataCode: '0180807f7f8f0000',
+    },
+    E: {
+      teamKey: 'A',
+      teamName: 'Equipo A',
+      logo: 'https://es.freelogodesign.org/Content/img/logo-ex-2.png',
+      points: 0,
+      dataCode: '0280807f7f0f1000',
+    },
+    f: {
+      teamKey: 'B',
+      teamName: 'Equipo B',
+      logo: 'https://es.freelogodesign.org/Content/img/logo-ex-2.png',
+      points: 0,
+      dataCode: '018080007f0f0000',
+    },
+    g: {
+      teamKey: 'C',
+      teamName: 'Equipo C',
+      logo: 'https://es.freelogodesign.org/Content/img/logo-ex-2.png',
+      points: 0,
+      dataCode: '0280807f000f0000',
+    },
+    h: {
+      teamKey: 'D',
+      teamName: 'Equipo D',
+      logo: 'https://es.freelogodesign.org/Content/img/logo-ex-2.png',
+      points: 0,
+      dataCode: '0180807f7f8f0000',
+    },
+  },
+};

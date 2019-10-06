@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
+    "start:front": "react-scripts start",
     "prettierFix": "prettier --config .prettierrc --write",
     "eslint": "eslint"
   },
@@ -20,11 +21,30 @@
       "git add"
     ]
   },
-  "author": "",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "author": "Adri Blanco <adriblabla@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.1.0",
     "node-hid": "^0.7.3",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-jss": "^10.0.0",
+    "react-scripts": "3.2.0",
+    "prop-types": "^15.7.2",
     "websocket": "^1.0.28"
   },
   "devDependencies": {
@@ -35,10 +55,12 @@
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-flowtype": "^4.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.1.2",
     "husky": "^3.0.8",
     "lint-staged": "^9.4.1",
     "nodemon": "^1.19.3",

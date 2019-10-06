@@ -8,7 +8,7 @@ let state = JSON.parse(JSON.stringify(initialState));
 function teamPressedButton(server, teamKey) {
   const { winner, winnerTimestamp, teamLogged } = state;
   if (!winner) {
-    server.send({ winner: teamKey, status: 'winner' });
+    server.send({ teamKey, eventKey: 'winner' });
     state.winner = teamKey;
     state.winnerTimestamp = new Date().getTime();
     state.teamLogged[teamKey] = true;
@@ -17,7 +17,7 @@ function teamPressedButton(server, teamKey) {
       state = JSON.parse(JSON.stringify(initialState));
       // eslint-disable-next-line no-console
       console.log('Ready, sir!');
-    }, 10000);
+    }, 1000);
   }
 
   if (winner !== teamKey && !teamLogged[teamKey]) {
