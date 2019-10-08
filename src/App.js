@@ -4,6 +4,7 @@ import withStyles from 'react-jss';
 import GameConfiguration from './config';
 import TeamCard from './components/TeamCard';
 import WinnerSection from './components/WinnerSection';
+import PlayerUtils from './utils/player';
 
 const styles = {
   container: {
@@ -14,18 +15,36 @@ const styles = {
     alignItems: 'center',
     flexWrap: 'wrap',
   },
+  teamCardContainer: {
+    width: `${100 / Math.round(PlayerUtils.teamsLength() / 2)}%`,
+    height: '45%',
+  },
+  teamCardContainerTwoTeams: {
+    width: '50%',
+    height: '50%',
+  },
 };
 
-function renderTeamCards(teams) {
+function renderTeamCards(classes, teams) {
   return Object.keys(teams).map(teamKey => {
     const team = teams[teamKey];
+    const teamsLength = PlayerUtils.teamsLength();
     return (
-      <TeamCard
+      <div
         key={teamKey}
-        name={team.teamName}
-        logo={team.logo}
-        points={team.points}
-      />
+        className={
+          teamsLength === 2
+            ? classes.teamCardContainerTwoTeams
+            : classes.teamCardContainer
+        }
+      >
+        <TeamCard
+          name={team.teamName}
+          logo={team.logo}
+          points={team.points}
+          color={team.color}
+        />
+      </div>
     );
   });
 }
@@ -37,14 +56,17 @@ function App({ classes }) {
   const [state, setState] = useState({});
   function setWinner(winner) {
     setState({
-      winner,
+      winner: PlayerUtils.getTeamInfo(winner),
       differences: [],
     });
   }
-  function pushDifferences(newDifference) {
+  function pushDifferences({ teamKey, difference }) {
     setState({
       ...state,
-      differences: [...state.differences, newDifference],
+      differences: [
+        ...state.differences,
+        { ...PlayerUtils.getTeamInfo(teamKey), difference },
+      ],
     });
   }
   server.onmessage = function onMessage(event) {
@@ -62,7 +84,7 @@ function App({ classes }) {
       {!teams && (
         <span>Configuration needed. Execute npm run config to fix this.</span>
       )}
-      {!state.winner && renderTeamCards(teams)}
+      {!state.winner && renderTeamCards(classes, teams)}
       {state.winner && (
         <WinnerSection winner={state.winner} differences={state.differences} />
       )}

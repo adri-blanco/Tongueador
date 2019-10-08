@@ -6,19 +6,31 @@ const style = {
   container: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'column',
+    height: '100%',
+    width: '100%',
+    backgroundImage: props => `url(${props.logo})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'contain',
   },
-  name: {
-    fontSize: '25px',
+  text: {
+    fontSize: '7vw',
+    borderRadius: '15px',
+    padding: '10px',
+    backgroundColor: props => props.color,
+  },
+  logo: {
+    height: '35%',
   },
 };
 
-function TeamCard({ classes, name, logo, points }) {
+function TeamCard({ classes, name, points }) {
   return (
     <div className={classes.container}>
-      <img src={logo} alt={`Logo of team ${name}`} />
-      <span className={classes.name}>{name}</span>
-      <span className={classes.points}>{points}</span>
+      <span className={classes.text}>{name}</span>
+      <span className={classes.text}>{points}</span>
     </div>
   );
 }
@@ -26,13 +38,11 @@ function TeamCard({ classes, name, logo, points }) {
 TeamCard.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
-  logo: PropTypes.string,
   points: PropTypes.number,
 };
 
 TeamCard.defaultProps = {
   name: undefined,
-  logo: undefined,
   points: undefined,
 };
 
