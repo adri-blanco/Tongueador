@@ -51,6 +51,10 @@ function renderTeamCards(classes, teams) {
 
 // eslint-disable-next-line
 const server = new WebSocket('ws://127.0.0.1:3500');
+// eslint-disable-next-line no-console
+server.onopen = () => console.log('Ready');
+// eslint-disable-next-line no-console
+server.onerror = console.error;
 
 function App({ classes }) {
   const [state, setState] = useState({});

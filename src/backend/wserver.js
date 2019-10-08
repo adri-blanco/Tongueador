@@ -32,6 +32,8 @@ WServer.prototype.listen = function listen(port) {
 };
 
 WServer.prototype.handleConnect = function handleConnect(connection) {
+  // eslint-disable-next-line no-console
+  console.log('Connection ready');
   this.connection_pool.push(connection);
 };
 
