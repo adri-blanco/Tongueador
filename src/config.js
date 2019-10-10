@@ -1,4 +1,5 @@
 export default {
+  refreshTime: 10000,
   teams: {
     A: {
       teamKey: 'A',

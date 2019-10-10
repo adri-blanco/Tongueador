@@ -1,3 +1,5 @@
+import config from '../config';
+
 const initialState = {
   winner: null,
   winnerTimestamp: null,
@@ -17,7 +19,7 @@ function teamPressedButton(server, teamKey) {
       state = JSON.parse(JSON.stringify(initialState));
       // eslint-disable-next-line no-console
       console.log('Ready, sir!');
-    }, 1000);
+    }, config.refreshTime || 10000);
   }
 
   if (winner !== teamKey && !teamLogged[teamKey]) {
