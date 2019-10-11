@@ -7,7 +7,7 @@ const WebSocketServer = WebSocket.server;
 
 function WServer() {
   this.connection_pool = [];
-
+  this.ready = false;
   this.server = http.createServer(() => {
     // process HTTP request. Since we're writing just WebSockets
     // server we don't have to implement anything.
@@ -34,10 +34,12 @@ WServer.prototype.listen = function listen(port) {
 WServer.prototype.handleConnect = function handleConnect(connection) {
   // eslint-disable-next-line no-console
   console.log('Connection ready');
+  this.ready = true;
   this.connection_pool.push(connection);
 };
 
 WServer.prototype.handleDisconnect = function handleDisconnect(connection) {
+  this.ready = false;
   const index = this.connection_pool.indexOf(connection);
   if (index > -1) {
     this.connection_pool.splice(index, 1);

@@ -8,6 +8,10 @@ const initialState = {
 let state = JSON.parse(JSON.stringify(initialState));
 
 function teamPressedButton(server, teamKey) {
+  if (!server.ready) {
+    return;
+  }
+
   const { winner, winnerTimestamp, teamLogged } = state;
   if (!winner) {
     server.send({ teamKey, eventKey: 'winner' });

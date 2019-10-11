@@ -4,6 +4,7 @@ import withStyles from 'react-jss';
 import GameConfiguration from './config';
 import TeamCard from './components/TeamCard';
 import WinnerSection from './components/WinnerSection';
+import Loading from './components/Loading';
 import PlayerUtils from './utils/player';
 
 const styles = {
@@ -52,12 +53,16 @@ function renderTeamCards(classes, teams) {
 // eslint-disable-next-line
 const server = new WebSocket('ws://127.0.0.1:3500');
 // eslint-disable-next-line no-console
-server.onopen = () => console.log('Ready');
-// eslint-disable-next-line no-console
 server.onerror = console.error;
 
 function App({ classes }) {
   const [state, setState] = useState({});
+  const [loading, setLoading] = useState(true);
+  server.onopen = () => {
+    // eslint-disable-next-line no-console
+    console.log('Ready');
+    setLoading(false);
+  };
   function setWinner(winner) {
     setState({
       winner: PlayerUtils.getTeamInfo(winner),
@@ -83,6 +88,10 @@ function App({ classes }) {
   };
 
   const { teams } = GameConfiguration;
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className={classes.container}>
       {!teams && (
