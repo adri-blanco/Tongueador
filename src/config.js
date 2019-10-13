@@ -1,5 +1,9 @@
 export default {
   refreshTime: 10000,
+  usbEncoder: {
+    PID: 57345,
+    VID: 2064,
+  },
   teams: {
     A: {
       teamKey: 'A',
