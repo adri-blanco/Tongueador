@@ -1,13 +1,10 @@
 import HID from 'node-hid';
 import GameConfiguration from '../config';
 
-const PID = 57345;
-const VID = 2064;
-
-const { teams } = GameConfiguration;
+const { teams, usbEncoder } = GameConfiguration;
 
 function Devicemanager(gameController) {
-  const device = new HID.HID(VID, PID);
+  const device = new HID.HID(usbEncoder.VID, usbEncoder.PID);
   device.on('data', rawData => {
     const data = rawData.toString('hex');
 
