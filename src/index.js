@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import DeviceManager from './backend/devicemanager';
+
+DeviceManager();
 
 // eslint-disable-next-line no-undef
 ReactDOM.render(<App />, document.getElementById('root'));

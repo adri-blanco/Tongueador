@@ -41,13 +41,14 @@
   "author": "Adri Blanco <adriblabla@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@rematch/core": "^1.2.0",
     "node-hid": "^0.7.3",
+    "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-jss": "^10.0.0",
-    "react-scripts": "3.2.0",
-    "prop-types": "^15.7.2",
-    "websocket": "^1.0.28"
+    "react-redux": "^7.1.1",
+    "react-scripts": "3.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
